@@ -16,9 +16,12 @@ arguments = parser.parse_args()
 
 filepath = os.path.normpath(arguments.path)
 
-with open(filepath, 'r') as f:
-    json_tree = JSONTree.from_string(f.read())
-    if arguments.htmlize:
-        print(json_tree.htmlize())
-    if arguments.flatten:
-        print(json_tree.flatten())
+try:
+    with open(filepath, 'r') as f:
+        json_tree = JSONTree.from_string(f.read())
+        if arguments.htmlize:
+            print(json_tree.htmlize())
+        if arguments.flatten:
+            print(json_tree.flatten())
+except IOError as e:
+    print("An Error occured: {}".format(e.strerror))
