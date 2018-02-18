@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 import json
 from collections import OrderedDict
 
-from JSONVistor import JSONHtmlVisitor, JSONFlattenVisitor
+from lib.JSONVistor import JSONHtmlVisitor, JSONFlattenVisitor
 
 
 class JSONTree(object):

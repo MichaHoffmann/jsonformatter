@@ -1,7 +1,7 @@
 import unittest
 from xml.etree import ElementTree
 
-from project.lib.JSONTree import JSONTree, JSONDictNode, JSONListNode
+from lib.JSONTree import JSONTree, JSONDictNode, JSONListNode
 
 
 class TestJSONTreeFromString(unittest.TestCase):
