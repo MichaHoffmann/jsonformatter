@@ -64,28 +64,35 @@ class TestJSONTreeFormattingNestedDict(unittest.TestCase):
 
     def test_htmlize_table_has_caption_and_body(self):
         htmlroot = ElementTree.fromstring(self.json_tree.htmlize())
-        self.assertEqual(list(map(lambda e: e.tag, list(htmlroot))), ['caption', 'tbody'])
+        self.assertEqual(list(map(lambda e: e.tag, list(htmlroot))), [
+                         'caption', 'tbody'])
 
     def test_htmlize_tablebody_has_table_from_list(self):
         htmlroot = ElementTree.fromstring(self.json_tree.htmlize())
-        self.assertEqual('List', htmlroot.findall('./tbody/tr/td/table/caption')[0].text)
+        self.assertEqual('List', htmlroot.findall(
+            './tbody/tr/td/table/caption')[0].text)
 
     def test_htmlize_outermost_table_key(self):
         htmlroot = ElementTree.fromstring(self.json_tree.htmlize())
-        self.assertEqual('a', htmlroot.findall('./tbody/tr/td')[0].text.strip())
+        self.assertEqual('a', htmlroot.findall(
+            './tbody/tr/td')[0].text.strip())
 
     def test_htmlize_outermost_table_val(self):
         htmlroot = ElementTree.fromstring(self.json_tree.htmlize())
-        self.assertEqual('table', htmlroot.findall('./tbody/tr/td/table')[0].tag)
+        self.assertEqual('table', htmlroot.findall(
+            './tbody/tr/td/table')[0].tag)
 
     def test_htmlize_innermost_table_exists(self):
         htmlroot = ElementTree.fromstring(self.json_tree.htmlize())
-        self.assertEqual('table', htmlroot.findall('./tbody/tr/td/table/tbody/tr/td/table')[0].tag)
+        self.assertEqual('table', htmlroot.findall(
+            './tbody/tr/td/table/tbody/tr/td/table')[0].tag)
 
     def test_htmlize_innermost_table_key(self):
         htmlroot = ElementTree.fromstring(self.json_tree.htmlize())
-        self.assertEqual('c', htmlroot.findall('./tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td')[0].text.strip())
+        self.assertEqual('c', htmlroot.findall(
+            './tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td')[0].text.strip())
 
     def test_htmlize_innermost_table_value(self):
         htmlroot = ElementTree.fromstring(self.json_tree.htmlize())
-        self.assertEqual('d', htmlroot.findall('./tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td')[1].text.strip())
+        self.assertEqual('d', htmlroot.findall(
+            './tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td')[1].text.strip())

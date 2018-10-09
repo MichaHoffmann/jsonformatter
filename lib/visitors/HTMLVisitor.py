@@ -1,49 +1,6 @@
-from abc import ABCMeta, abstractmethod
+from lib.visitors.JSONVisitor import JSONVisitor
 
-
-class JSONVisitor(object):
-    __meta__ = ABCMeta
-
-    @abstractmethod
-    def visit_base(self, node):
-        pass
-
-    @abstractmethod
-    def visit_list(self, node):
-        pass
-
-    @abstractmethod
-    def visit_dict(self, node):
-        pass
-
-
-class JSONFlattenVisitor(JSONVisitor):
-    def __init__(self):
-        self.prefix = 'data'
-
-    def visit_dict(self, node):
-        res = ''
-        tmp_prefix = self.prefix
-        for key, child in node.children.items():
-            self.prefix += '.{}'.format(key)
-            res += child.accept(self)
-            self.prefix = tmp_prefix
-        return res
-
-    def visit_list(self, node):
-        res = ''
-        tmp_prefix = self.prefix
-        for key, child in node.children.items():
-            self.prefix += '[{}]'.format(key)
-            res += child.accept(self)
-            self.prefix = tmp_prefix
-        return res
-
-    def visit_base(self, node):
-        return '{} = "{}"\n'.format(self.prefix, node.val)
-
-
-class JSONHtmlVisitor(JSONVisitor):
+class HTMLVisitor(JSONVisitor):
     def __init__(self):
         self.tabs = 0
 
@@ -90,6 +47,3 @@ class JSONHtmlVisitor(JSONVisitor):
     def visit_base(self, node):
         return '{indent}{content}\n'.format(indent=self.tabs * 4 * ' ',
                                             content=node.val)
-
-
-

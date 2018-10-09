@@ -2,7 +2,9 @@ from abc import ABCMeta, abstractmethod
 import json
 from collections import OrderedDict
 
-from lib.JSONVistor import JSONHtmlVisitor, JSONFlattenVisitor
+from lib.visitors.HTMLVisitor import HTMLVisitor
+from lib.visitors.FlattenVisitor import FlattenVisitor
+from lib.visitors.PrettyVisitor import PrettyVisitor
 
 
 class JSONTree(object):
@@ -35,10 +37,13 @@ class JSONTree(object):
         pass
 
     def htmlize(self):
-        return self.accept(JSONHtmlVisitor())
+        return self.accept(HTMLVisitor())
 
     def flatten(self):
-        return self.accept(JSONFlattenVisitor())
+        return self.accept(FlattenVisitor())
+
+    def pretty(self):
+        return self.accept(PrettyVisitor())
 
 
 class JSONDictNode(JSONTree):
@@ -69,5 +74,4 @@ class JSONBaseNode(JSONTree):
 
     def accept(self, visitor):
         return visitor.visit_base(self)
-
 

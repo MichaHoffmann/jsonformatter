@@ -5,7 +5,12 @@
 "limit": 10,
 "facets": {},
 "objecttypes": [
-"objekte"
+"objekte",
+"foos",
+"bars",
+true,
+false, 
+null
 ],
 "language": "de-DE",
 "count": 2,
@@ -13,10 +18,11 @@
 "objects": [
 {
 "_acl": [
-{
+{ "foo": {
 "_id": 1335359,
-"date_created": "2016-08-22T19:26:10+02:00"
-}
+"date_created": "2016-08-22T19:26:10+02:00",
+"foo": "bar"
+}}
 ]
 }
 ]
