@@ -1,4 +1,5 @@
 {
+"t[estobj": { "foo": [{},{}]},
 "format": "long",
 "type": "objects",
 "offset": 0,
